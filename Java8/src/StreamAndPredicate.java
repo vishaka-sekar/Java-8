@@ -4,6 +4,24 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class StreamAndPredicate {
+
+    /**
+    * @param : takes 2 inputs: List of integers, and a condition
+    ** @param condition uses dependency injection to specify a condition at runtime
+    * **/
+    public static void printElements(List<Integer> list , Predicate<Integer> condition){
+    list.stream()
+            .filter(condition)
+            .forEach(i -> System.out.println(i));
+    }
+
+    public static int totalElements(List<Integer> list, Predicate<Integer> condition){
+
+        return list.stream()
+                .filter(condition)
+                .reduce(0,Math::addExact);
+    }
+
     public static void main(String args[]) {
 
         List<Integer> values = new ArrayList<>(Arrays.asList(1,2,4,5,7));
@@ -31,23 +49,7 @@ public class StreamAndPredicate {
 
     }
 
-    /**
-     * @param : takes 2 inputs: List of integers, and a condition
-     ** @param condition uses dependency injection to specify a condition at runtime
-     * **/
-    public static void printElements(List<Integer> list , Predicate<Integer> condition){
-        list.stream()
-                .filter(condition)
-                .forEach(i -> System.out.println(i));
-    }
 
-
-    public static int totalElements(List<Integer> list, Predicate<Integer> condition){
-
-        return list.stream()
-                .filter(condition)
-                .reduce(0,Math::addExact);
-    }
 
 
 }
